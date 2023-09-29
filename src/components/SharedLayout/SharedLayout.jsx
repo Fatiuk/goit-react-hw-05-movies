@@ -12,7 +12,7 @@ const SharedLayout = () => {
           Meren Movies
         </Logo>
         <nav>
-          <Link to="/" end>
+          <Link to="/">
             Home
           </Link>
           <Link to="/movies">Movies</Link>
