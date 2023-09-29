@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const MovieItem = styled.li``;
+export const MovieItem = styled.li`
+  max-width: 300px;
+`;
 
 export const MovieLink = styled(Link)`
   text-decoration: none;
