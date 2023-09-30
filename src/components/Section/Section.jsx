@@ -1,12 +1,7 @@
-import { SectionWrap, SectionTitle } from './Section.styled';
+import { SectionWrap } from './Section.styled';
 
-const Section = ({ title, children }) => {
-  return (
-    <SectionWrap>
-      <SectionTitle>{title}</SectionTitle>
-      {children}
-    </SectionWrap>
-  );
+const Section = ({ children }) => {
+  return <SectionWrap>{children}</SectionWrap>;
 };
 
 export default Section;

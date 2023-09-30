@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { RingLoader } from 'react-spinners';
 import { fetchTrendingMovies } from 'services/themoviedb-api';
+import Hero from 'components/Hero/Hero';
 import MoviesList from 'components/MoviesList/MoviesList';
 
 export const Home = () => {
   // State to store data about trending movies
   const [trendingMovies, setTrendingMovies] = useState([]);
+  // State to track loading state
+  const [loading, setLoading] = useState(true);
 
   // Fetch movie data when the component mounts
   useEffect(() => {
@@ -18,6 +19,8 @@ export const Home = () => {
         const movies = await fetchTrendingMovies();
         // Update the trendingMovies state with the movie data
         setTrendingMovies(movies);
+        // Set loading to false to indicate that data has been loaded
+        // setLoading(false);
       } catch (error) {
         // If an error occurs, log it to the console
         console.error(error);
@@ -27,38 +30,22 @@ export const Home = () => {
     fetchMoviesData();
   }, []);
 
-  const sliderSettings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
-  };
-
   return (
     <main>
-      <h1>Welcome to Meren Movies</h1>
-      <Slider {...sliderSettings}>
-        <div>
-          <img src="https://via.placeholder.com/960x240" alt="" />
+      <Hero></Hero>
+      {loading ? (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <RingLoader color="#004d40" size={120} />
         </div>
-        <div>
-          <img src="https://via.placeholder.com/960x240" alt="" />
-        </div>
-        <div>
-          <img src="https://via.placeholder.com/960x240" alt="" />
-        </div>
-      </Slider>
-      <p>
-        Explore Meren Movies - your gateway to captivating cinematic
-        experiences! We offer a diverse selection of popular films, the latest
-        movie releases, and cinematic classics. Immerse yourself in the world of
-        cinema with our collection of films spanning various genres, discover
-        the perfect movie to watch with friends and family, explore reviews and
-        ratings, and dive into unforgettable cinematic adventures. At Meren
-        Movies, you always have access to the thrilling realm of film!
-      </p>
-      <MoviesList films={trendingMovies} />
+      ) : (
+        <MoviesList films={trendingMovies} />
+      )}
     </main>
   );
 };
