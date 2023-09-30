@@ -26,7 +26,7 @@ const MoviesItem = ({
     <MovieItem>
       <MovieLink to={`/movies/${id}`} state={{ from: location }}>
         <img src={imageUrl} alt={title} loading="lazy" />
-        <p>{title}</p>
+        <p>{title.length > 20 ? `${title.substring(0, 20)}...` : title}</p>
       </MovieLink>
       <MovieInfo>
         <ul>
