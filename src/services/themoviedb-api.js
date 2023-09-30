@@ -13,8 +13,18 @@ const params = {
 export const fetchTrendingMovies = async () => {
   const response = await axios.get(`trending/movie/day`, params);
   if (response.status === 200) {
-    console.log(response.data.results);
     return response.data.results;
+  } else {
+    return Promise.reject(
+      new Error('Oops, something went wrong. Please try again.')
+    );
+  }
+};
+
+export const fetchMovieDetails = async movieId => {
+  const response = await axios.get(`/movie/${movieId}`, params);
+  if (response.status === 200) {
+    return response.data;
   } else {
     return Promise.reject(
       new Error('Oops, something went wrong. Please try again.')
