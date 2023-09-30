@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-// ============ API ============
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { fetchTrendingMovies } from 'services/themoviedb-api';
-// ============ Compinents ============
 import MoviesList from 'components/MoviesList/MoviesList';
 
 export const Home = () => {
@@ -26,10 +27,28 @@ export const Home = () => {
     fetchMoviesData();
   }, []);
 
+  const sliderSettings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    autoplay: true,
+    autoplaySpeed: 2500,
+  };
+
   return (
     <main>
       <h1>Welcome to Meren Movies</h1>
-      <img src="https://via.placeholder.com/960x240" alt="" />
+      <Slider {...sliderSettings}>
+        <div>
+          <img src="https://via.placeholder.com/960x240" alt="" />
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/960x240" alt="" />
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/960x240" alt="" />
+        </div>
+      </Slider>
       <p>
         Explore Meren Movies - your gateway to captivating cinematic
         experiences! We offer a diverse selection of popular films, the latest
