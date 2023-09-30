@@ -20,7 +20,7 @@ export const Home = () => {
         // Update the trendingMovies state with the movie data
         setTrendingMovies(movies);
         // Set loading to false to indicate that data has been loaded
-        // setLoading(false);
+        setLoading(false);
       } catch (error) {
         // If an error occurs, log it to the console
         console.error(error);
@@ -32,7 +32,7 @@ export const Home = () => {
 
   return (
     <main>
-      <Hero></Hero>
+      <Hero />
       {loading ? (
         <div
           style={{
