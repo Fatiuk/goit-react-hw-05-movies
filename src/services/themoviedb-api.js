@@ -53,3 +53,14 @@ export const fetchMovieReviews = async movieId => {
     );
   }
 };
+
+export const fetchMovieByName = async movieName => {
+  const response = await axios.get(`/search/movie?query=${movieName}`, params);
+  if (response.status === 200) {
+    return response.data.results;
+  } else {
+    return Promise.reject(
+      new Error('Oops, something went wrong. Please try again.')
+    );
+  }
+};

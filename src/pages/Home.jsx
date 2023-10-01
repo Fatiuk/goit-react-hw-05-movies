@@ -44,7 +44,10 @@ export const Home = () => {
           <RingLoader color="#004d40" size={120} />
         </div>
       ) : (
-        <MoviesList films={trendingMovies} />
+        <>
+          <h2>Must-Watch Movies</h2>
+          <MoviesList films={trendingMovies} />
+        </>
       )}
     </main>
   );

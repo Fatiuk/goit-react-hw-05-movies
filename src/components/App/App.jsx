@@ -4,7 +4,7 @@ import SharedLayout from 'components/SharedLayout/SharedLayout';
 // ============ Home ============
 import { Home } from 'pages/Home';
 // ============ Movies ============
-import { Movies } from 'pages/Movies';
+import Movies from 'pages/Movies';
 // ============ MoviesDetails ============
 import MovieDetails from 'pages/MovieDetails';
 // ============ Cast ============
