@@ -10,7 +10,7 @@ import {
 } from './Searchbar.styled';
 
 const Searchbar = ({ onSubmit }) => {
-  const [_searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState('');
 
   // Function that updates the state based on user input
@@ -31,6 +31,7 @@ const Searchbar = ({ onSubmit }) => {
       );
     }
     // Update the search parameters and call the onSubmit function
+    searchParams.get('query');
     setSearchParams({ query });
     onSubmit(query);
   };
@@ -47,7 +48,7 @@ const Searchbar = ({ onSubmit }) => {
           type="text"
           autoComplete="off"
           autoFocus
-          placeholder="Search images and photos"
+          placeholder="Please input a query to search for a movie by its title"
           value={inputValue}
           onChange={handleChange}
         />
