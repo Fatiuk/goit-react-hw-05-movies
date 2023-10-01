@@ -18,13 +18,13 @@ const Hero = () => {
       <Title>Welcome to Meren Movies</Title>
       <Slider {...sliderSettings}>
         <div>
-          <img src="https://via.placeholder.com/960x240" alt="" />
+          <img src="https://i.ibb.co/HTHCptS/banner1.png" alt="First Banner" />
         </div>
         <div>
-          <img src="https://via.placeholder.com/960x240" alt="" />
+          <img src="https://i.ibb.co/tzHYjKk/banner2.png" alt="Second Banner" />
         </div>
         <div>
-          <img src="https://via.placeholder.com/960x240" alt="" />
+          <img src="https://i.ibb.co/0KbpFRm/banner3.png" alt="Third Banner" />
         </div>
       </Slider>
       <HeroTextWrap>
