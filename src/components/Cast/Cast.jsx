@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CastList, CastItem } from './Cast.styled';
 import { fetchMovieCast } from 'services/themoviedb-api';
+import Section from 'components/Section/Section';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -10,8 +11,8 @@ const Cast = () => {
   useEffect(() => {
     const getMovieCast = async () => {
       try {
-        const response = await fetchMovieCast(movieId);
-        setCast(response);
+        const dataCast = await fetchMovieCast(movieId);
+        setCast(dataCast);
       } catch (error) {
         console.error(error);
       }
@@ -20,8 +21,8 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <>
-      {cast.length !== 0 && (
+    <Section>
+      {cast.length !== 0 ? (
         <div>
           <h2>Movie Cast</h2>
           <CastList>
@@ -40,9 +41,10 @@ const Cast = () => {
             ))}
           </CastList>
         </div>
+      ) : (
+        <div>We don't have any cast for this movie.</div>
       )}
-      {cast.length === 0 && <div>We don't have any cast for this movie.</div>}
-    </>
+    </Section>
   );
 };
 

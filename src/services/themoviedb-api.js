@@ -42,3 +42,14 @@ export const fetchMovieCast = async movieId => {
     );
   }
 };
+
+export const fetchMovieReviews = async movieId => {
+  const response = await axios.get(`movie/${movieId}/reviews?`, params);
+  if (response.status === 200) {
+    return response.data.results;
+  } else {
+    return Promise.reject(
+      new Error('Oops, something went wrong. Please try again.')
+    );
+  }
+};
