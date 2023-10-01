@@ -31,3 +31,14 @@ export const fetchMovieDetails = async movieId => {
     );
   }
 };
+
+export const fetchMovieCast = async movieId => {
+  const response = await axios.get(`movie/${movieId}/credits?`, params);
+  if (response.status === 200) {
+    return response.data.cast;
+  } else {
+    return Promise.reject(
+      new Error('Oops, something went wrong. Please try again.')
+    );
+  }
+};

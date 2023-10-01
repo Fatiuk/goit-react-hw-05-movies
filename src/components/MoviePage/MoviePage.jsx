@@ -96,7 +96,7 @@ const MoviePage = () => {
                           alt={company.name}
                         />
                       ) : (
-                        <div className="placeholder">No Logo</div>
+                        <div>No Logo</div>
                       )}
                       <p>{company.name}</p>
                     </ProductionCompanyItem>
