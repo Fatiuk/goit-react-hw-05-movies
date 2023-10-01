@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { AiOutlineFieldTime } from 'react-icons/ai';
+import { BsFillPeopleFill } from 'react-icons/bs';
+import { MdReviews } from 'react-icons/md';
 import { RingLoader } from 'react-spinners';
 import { fetchMovieDetails } from 'services/themoviedb-api';
 import {
@@ -10,8 +12,10 @@ import {
   MovieTime,
   GenresList,
   GenresItem,
+  MovieLinksWrap,
   ProductionCompaniesList,
   ProductionCompanyItem,
+  Link,
 } from './MoviePage.styled';
 import Section from 'components/Section/Section';
 
@@ -41,6 +45,8 @@ const MoviePage = () => {
     };
     getMovieDetails();
   }, [movieId]);
+
+  const location = useLocation();
 
   const imageUrl = poster_path
     ? `https://image.tmdb.org/t/p/w400/${poster_path}`
@@ -73,12 +79,11 @@ const MoviePage = () => {
                 <h2>Genres</h2>
                 <GenresList>
                   {genres.map(genre => (
-                    <GenresItem key={genre.id}>{genre.name}</GenresItem>
+                    <GenresItem key={genre.id}>#{genre.name}</GenresItem>
                   ))}
                 </GenresList>
               </div>
             )}
-
             {production_companies && production_companies.length > 0 && (
               <div>
                 <h2>Production Companies</h2>
@@ -99,6 +104,16 @@ const MoviePage = () => {
                 </ProductionCompaniesList>
               </div>
             )}
+            <MovieLinksWrap>
+              <Link to="cast" state={location.state}>
+                <BsFillPeopleFill />
+                Cast
+              </Link>
+              <Link to="reviews" state={location.state ?? '/movies'}>
+                <MdReviews />
+                Reviews
+              </Link>
+            </MovieLinksWrap>
           </MovieInfo>
         </MovieWrap>
       ) : (
@@ -112,6 +127,7 @@ const MoviePage = () => {
           <RingLoader color="#004d40" size={120} />
         </div>
       )}
+      <Outlet />
     </Section>
   );
 };

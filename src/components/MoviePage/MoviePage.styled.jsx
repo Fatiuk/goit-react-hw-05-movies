@@ -1,4 +1,21 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+export const Link = styled(NavLink)`
+  display: flex;
+  justify-content: space-around;
+  text-decoration: none;
+  padding: 10px;
+  width: 98px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #004d40;
+  transition: all 0.3s;
+  &:hover {
+    color: inherit;
+    background-color: #fff;
+  }
+`;
 
 export const MovieWrap = styled.div`
   display: flex;
@@ -51,8 +68,7 @@ export const GenresList = styled.ul`
 export const GenresItem = styled.li`
   padding: 10px;
   border-radius: 4px;
-  color: #fff;
-  background-color: #004d40;
+  border: 1px solid #004d40;
 `;
 
 export const ProductionCompaniesList = styled.div`
@@ -78,4 +94,11 @@ export const ProductionCompanyItem = styled.div`
     font-size: 16px;
     font-weight: bold;
   }
+`;
+
+export const MovieLinksWrap = styled.div`
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
 `;
