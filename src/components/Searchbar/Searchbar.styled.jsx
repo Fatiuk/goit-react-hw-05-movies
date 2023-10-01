@@ -14,6 +14,8 @@ export const SearchbarWrap = styled.header`
   padding-top: 12px;
   padding-bottom: 12px;
   color: inherit;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #004d40;
 `;
 
 export const SearchbarForm = styled.form`

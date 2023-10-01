@@ -7,14 +7,12 @@ const SharedLayout = () => {
       <Header>
         <Logo>
           <span role="img" aria-label="computer icon">
-            💻
-          </span>{' '}
+            🎥
+          </span>
           Meren Movies
         </Logo>
         <nav>
-          <Link to="/">
-            Home
-          </Link>
+          <Link to="/">Home</Link>
           <Link to="/movies">Movies</Link>
         </nav>
       </Header>
