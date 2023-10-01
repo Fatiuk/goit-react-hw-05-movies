@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AiOutlineFieldTime } from 'react-icons/ai';
+import { RingLoader } from 'react-spinners';
 import { fetchMovieDetails } from 'services/themoviedb-api';
 import {
   MovieWrap,
@@ -23,6 +24,7 @@ const MoviePage = () => {
     overview,
     genres,
     runtime,
+    release_date,
     backdrop_path,
     poster_path,
     production_companies,
@@ -44,11 +46,10 @@ const MoviePage = () => {
     ? `https://image.tmdb.org/t/p/w400/${poster_path}`
     : 'https://via.placeholder.com/400x600';
 
-  // Функция для округления часов и добавления остатка минут
   const formatRuntime = runtime => {
     const hours = Math.floor(runtime / 60);
     const minutes = runtime % 60;
-    return `${hours} часов ${minutes} минут`;
+    return `${hours} hours ${minutes} minutes`;
   };
 
   return (
@@ -63,6 +64,7 @@ const MoviePage = () => {
                 <AiOutlineFieldTime />
                 <p>{formatRuntime(runtime)}</p>
               </MovieTime>
+              <p>Release {release_date}</p>
             </MovieGeneral>
             <h2>Overview</h2>
             <p>{overview}</p>
@@ -76,6 +78,7 @@ const MoviePage = () => {
                 </GenresList>
               </div>
             )}
+
             {production_companies && production_companies.length > 0 && (
               <div>
                 <h2>Production Companies</h2>
@@ -84,11 +87,11 @@ const MoviePage = () => {
                     <ProductionCompanyItem key={company.id}>
                       {company.logo_path ? (
                         <img
-                          src={`https://image.tmdb.org/t/p/w200${company.logo_path}`} // Используем логотип компании
+                          src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
                           alt={company.name}
                         />
                       ) : (
-                        <div>No Logo</div>
+                        <div className="placeholder">No Logo</div>
                       )}
                       <p>{company.name}</p>
                     </ProductionCompanyItem>
@@ -99,7 +102,15 @@ const MoviePage = () => {
           </MovieInfo>
         </MovieWrap>
       ) : (
-        <p>Loading...</p>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <RingLoader color="#004d40" size={120} />
+        </div>
       )}
     </Section>
   );
