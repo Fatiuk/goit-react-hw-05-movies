@@ -1,12 +1,32 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AiOutlineFieldTime } from 'react-icons/ai';
 import { fetchMovieDetails } from 'services/themoviedb-api';
-import { MovieWrap } from './MoviePage.styled';
+import {
+  MovieWrap,
+  MovieInfo,
+  MovieGeneral,
+  MovieTime,
+  GenresList,
+  GenresItem,
+  ProductionCompaniesList,
+  ProductionCompanyItem,
+} from './MoviePage.styled';
 import Section from 'components/Section/Section';
 
 const MoviePage = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
+
+  const {
+    title,
+    overview,
+    genres,
+    runtime,
+    backdrop_path,
+    poster_path,
+    production_companies,
+  } = movieDetails || {};
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -20,21 +40,67 @@ const MoviePage = () => {
     getMovieDetails();
   }, [movieId]);
 
-  console.log(movieDetails);
+  const imageUrl = poster_path
+    ? `https://image.tmdb.org/t/p/w400/${poster_path}`
+    : 'https://via.placeholder.com/400x600';
+
+  // Функция для округления часов и добавления остатка минут
+  const formatRuntime = runtime => {
+    const hours = Math.floor(runtime / 60);
+    const minutes = runtime % 60;
+    return `${hours} часов ${minutes} минут`;
+  };
+
   return (
     <Section>
-      <MovieWrap>
-        {movieDetails ? (
-          <>
-            <h2>{movieDetails.title}</h2>
+      {movieDetails ? (
+        <MovieWrap backdrop={backdrop_path}>
+          <img src={imageUrl} alt={title} loading="lazy" />
+          <MovieInfo>
+            <h1>{title}</h1>
+            <MovieGeneral>
+              <MovieTime>
+                <AiOutlineFieldTime />
+                <p>{formatRuntime(runtime)}</p>
+              </MovieTime>
+            </MovieGeneral>
             <h2>Overview</h2>
-            <p>{movieDetails.overview}</p>
-            <h2>Genres</h2>
-          </>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </MovieWrap>
+            <p>{overview}</p>
+            {genres && genres.length > 0 && (
+              <div>
+                <h2>Genres</h2>
+                <GenresList>
+                  {genres.map(genre => (
+                    <GenresItem key={genre.id}>{genre.name}</GenresItem>
+                  ))}
+                </GenresList>
+              </div>
+            )}
+            {production_companies && production_companies.length > 0 && (
+              <div>
+                <h2>Production Companies</h2>
+                <ProductionCompaniesList>
+                  {production_companies.map(company => (
+                    <ProductionCompanyItem key={company.id}>
+                      {company.logo_path ? (
+                        <img
+                          src={`https://image.tmdb.org/t/p/w200${company.logo_path}`} // Используем логотип компании
+                          alt={company.name}
+                        />
+                      ) : (
+                        <div>No Logo</div>
+                      )}
+                      <p>{company.name}</p>
+                    </ProductionCompanyItem>
+                  ))}
+                </ProductionCompaniesList>
+              </div>
+            )}
+          </MovieInfo>
+        </MovieWrap>
+      ) : (
+        <p>Loading...</p>
+      )}
     </Section>
   );
 };
