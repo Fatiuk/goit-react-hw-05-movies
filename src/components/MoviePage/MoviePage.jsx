@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 import { BsFillPeopleFill } from 'react-icons/bs';
 import { MdReviews } from 'react-icons/md';
-import { RingLoader } from 'react-spinners';
 import { fetchMovieDetails } from 'services/themoviedb-api';
 import {
   MovieWrap,
@@ -18,6 +17,7 @@ import {
   Link,
 } from './MoviePage.styled';
 import Section from 'components/Section/Section';
+import Loader from 'components/Loader/Loader';
 
 const MoviePage = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -118,17 +118,11 @@ const MoviePage = () => {
           </MovieInfo>
         </MovieWrap>
       ) : (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <RingLoader color="#004d40" size={120} />
-        </div>
+        <Loader />
       )}
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </Section>
   );
 };

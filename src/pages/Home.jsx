@@ -4,7 +4,7 @@ import { fetchTrendingMovies } from 'services/themoviedb-api';
 import Hero from 'components/Hero/Hero';
 import MoviesList from 'components/MoviesList/MoviesList';
 
-export const Home = () => {
+const Home = () => {
   // State to store data about trending movies
   const [trendingMovies, setTrendingMovies] = useState([]);
   // State to track loading state
@@ -52,3 +52,5 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;

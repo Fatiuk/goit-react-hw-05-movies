@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RingLoader } from 'react-spinners';
+import Loader from 'components/Loader/Loader';
 import { useSearchParams } from 'react-router-dom';
 import Searchbar from 'components/Searchbar/Searchbar';
 import MoviesList from 'components/MoviesList/MoviesList';
@@ -59,15 +59,7 @@ const Movies = () => {
     <div>
       <Searchbar onSubmit={handleSubmit} />
       {loading ? (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <RingLoader color="#004d40" size={120} />
-        </div>
+        <Loader />
       ) : (
         <>
           {searchParams.get('query') && (
