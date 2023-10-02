@@ -47,6 +47,7 @@ const MoviePage = () => {
   }, [movieId]);
 
   const location = useLocation();
+  console.log(location);
 
   const imageUrl = poster_path
     ? `https://image.tmdb.org/t/p/w400/${poster_path}`
@@ -105,11 +106,11 @@ const MoviePage = () => {
               </div>
             )}
             <MovieLinksWrap>
-              <Link to="cast" state={location.state}>
+              <Link to="cast" state={{ from: location.state?.from }}>
                 <BsFillPeopleFill />
                 Cast
               </Link>
-              <Link to="reviews" state={location.state ?? '/movies'}>
+              <Link to="reviews" state={{ from: location.state?.from }}>
                 <MdReviews />
                 Reviews
               </Link>

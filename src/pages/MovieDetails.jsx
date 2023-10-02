@@ -5,10 +5,12 @@ import MoviePage from 'components/MoviePage/MoviePage';
 
 const MovieDetails = () => {
   const location = useLocation();
-  const backLinkHref = useRef(location.state?.from || '/');
+  const backLinkLocationRef = useRef(location.state?.from || '/');
   return (
     <>
-      <BackLink to={backLinkHref.current}>Back to Previous Action</BackLink>
+      <BackLink to={backLinkLocationRef.current}>
+        Back to Previous Action
+      </BackLink>
       <MoviePage></MoviePage>
     </>
   );
